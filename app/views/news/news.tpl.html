@@ -2,7 +2,7 @@
 	<div class="col-lg-12">
 	<!--
 		fra: utilizzo del two way data binding
-		filtro solo per il title	
+		filtro solo per il title usando il filtro filter	
 	-->
 	<input type="text" ng-model="ctrl.search.title" class="form-control">
 	
@@ -10,10 +10,31 @@
 	</div>
 </div>
 
-<div class="row">
+<!-- fra: questa soluzione rompe la grigla di bootstrap -->
+<!-- <div class="row"> -->
+<!--
+<div ng-include="row.open.html"></div>
 	<div class="col-lg-4" ng-repeat="item in ctrl.news | filter:ctrl.search">
 		<h2>{{item.title}}</h2>
 		<p>{{item.body}}</p>
 		<p><a class="btn btn-primary" ng-href="#/news/{{item.id}}" role="button">View details &raquo;</a></p>
 	</div>
+</div>
+-->
+
+<!-- fra: la direttiva ng-if crea un nuovo scope che mi consente di inizializzare il contenuto della variabile item senza sovrascrivere il valore per le altre direttive ng-include -->
+<div ng-repeat="item in ctrl.news | filter:ctrl.search" ng-if="$index % 3 == 0" class="row">
+
+    <div class="col-lg-4" ng-include src="'app/views/news/news.detail.html'"></div>
+	
+	<div class="col-lg-4"
+		ng-include src="'app/views/news/news.detail.html'"
+		ng-init="item = ctrl.news[$index + 1]"
+		ng-if="ctrl.news.length > ($index + 1)"></div>
+		
+    <div class="col-lg-4"
+		ng-if="ctrl.news.length > ($index + 2)"
+		ng-init="item = ctrl.news[$index + 2]"
+		ng-include src="'app/views/news/news.detail.html'"></div>
+
 </div>
