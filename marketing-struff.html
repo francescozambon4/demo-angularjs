@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="demoApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+	
+
+    <title>Justified Nav Template for Bootstrap</title>
+
+    <!-- styles -->
+	<link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="justified-nav.css" rel="stylesheet">
+	
+	<!-- vendors -->
+	<!-- fra: la versione non minificata dovrebbe essere usata in debug perchè offre più informazioni--> 
+	<script src="./node_modules/angular/angular.min.js"></script>
+	<script src="./node_modules/angular-route/angular-route.min.js"></script>
+	
+	<!-- core -->
+	<script src="app/app.js"></script>
+	<script src="app/router.js"></script>
+	
+	<!-- controllers -->
+	<script src="app/views/home/HomePage.js"></script>
+	<script src="app/views/news/News.js"></script>
+	<script src="app/views/news/NewsDetail.js"></script>
+	
+	
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <!-- The justified navigation menu is meant for single line per list item.
+           Multiple lines will require custom code not provided by Bootstrap. -->
+      <div class="masthead" ng-controller="NavBar as ctrl">
+        <h3 class="text-muted">Project name</h3>
+        <nav>
+          <ul class="nav nav-justified">
+            <li ng-class="{'active' : ctrl.active === '/homepage'}"><a href="#/homepage">HomePage</a></li>
+            <li ng-class="{'active' : ctrl.active === '/news'}"><a href="#/news">News</a></li>
+            <li ng-class="{'active' : ctrl.active === '/reports'}"><a href="#/reports">Reports</a></li>
+            <li ng-class="{'active' : ctrl.active === '/contact'}"><a href="#/contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+	  
+	  <hr/>
+	  
+	  <!-- fra: la direttiva ng-include va a richiamare la direttiva ng-view -->
+	  <div ng-view></div>
+
+
+
+      <!-- Site footer -->
+      <footer class="footer">
+        <p>&copy; 2016 Company, Inc.</p>
+      </footer>
+
+    </div> <!-- /container -->
+	
+  </body>
+</html>
